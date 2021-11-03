@@ -10,19 +10,19 @@ let allSongs = [];
 
 async function geSongsFromAPI() {
     const response =  await fetching;
-    //respons omzetten naar json
+    //response omzetten naar json
     const songTitle = await response.json();
+    const songs = songTitle.response.songs
 
-
-    for (let i=0; i < songTitle.response.songs.length; i++){
-      let tempt = songTitle.response.songs[i].title;
-      allSongs.push(tempt);
+    //loop door song titels heen en zet deze in een array
+    for (let i=0; i < songs.length; i++){
+      allSongs.push(songs[i].title);
     }   
 
-    return songTitle.response.songs;  
+    return songs;  
   }
 
   //wanneer klaar met functie dan dit
-  geSongsFromAPI().then( songs =>{
-  console.log(allSongs);
+  geSongsFromAPI().then( songs => {
+  console.log(allSongs.sort());
 })
