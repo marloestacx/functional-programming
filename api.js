@@ -24,5 +24,6 @@ async function geSongsFromAPI() {
 
   //wanneer klaar met functie dan dit
   geSongsFromAPI().then( songs => {
+  //sorteer liedjes op alfabetische volgorde
   console.log(allSongs.sort());
 })

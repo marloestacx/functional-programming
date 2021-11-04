@@ -10,7 +10,7 @@ fetch("./dataset_raw.json")
   .then(function (data) 
   {
     toLowercase(data);
-    // console.table(data);
+    console.table(newData);
   })
   .catch(function (err) 
   {
@@ -18,66 +18,20 @@ fetch("./dataset_raw.json")
     console.log(err);
   });
 
-// //Data verwerken
-// function parseData(data) {
-// 	/* Deze functie genereert een nieuwe Promise, dit zou ook gebeuren als je de dataset met een fetch() zou ophalen */
-// 	return new Promise((resolve, reject) => {
-// 		let dataSet = data;
-// 		/* resolve stuurt de data naar de .then() onderin */
-// 		resolve(dataSet);
-// 	})
-// }
-
-
-// function removeNull(data) {
-//   if(data.length < 1){
-//     return "Geen antwoord"
-//   }
-//   };
-  
-// //Hoofdletters verwijderen
-//   function removeCapitals(data) {
-//     //Data omzetten naar string
-//     if(typeof data === 'string') 
-//     {
-//       data = data.toLowerCase();
-//       // console.log(data.split("{"));
-//       return data;
-//     } 
-//     else 
-//     {
-//       return data;
-//     }
-//   }
-
-
-
 function toLowercase(data) {
-
+// loop door de data heen
     for (let i = 0; i < data.length; i++) {
-           const dataItem = data[i];
-       
+           let dataItem = data[i];
+          // loop door alle objecten heen
            for (let j = 0; j < Object.entries(dataItem).length; j++) {
              dataItemVariable = Object.entries(dataItem)[j];
-            //  console.log( dataItemVariable)
+            // vervang vage tekekens en zet alle waardes om naar kleine letters
              dataItemVariable[1] = dataItemVariable[1].toString().replace(/[^a-zA-Z0-9 .-/]/g, '').toLowerCase();
-             Object.entries(dataItem)[j] = dataItemVariable;
+             //push data in nieuwe array
+             newData.push(dataItemVariable);
            }
-           console.log(dataItemVariable)
-           data[i] = dataItem;
-
     }
-    return data
-
+    return newData
 }
-
-  // function ifEmptyChangeToZero(data) {
-  //   data = JSON.stringify(data)
-  //   if(typeof data === 'string' && data.length < 1) {
-  //     return "Geen antwoord";
-  //   } else {
-  //     return data
-  //   }
-  // }
 
 
